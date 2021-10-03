@@ -1,0 +1,124 @@
+h1 {background-image: linear-gradient(to right, rgb(109, 109, 207), darkblue);
+    color:white;
+text-align: center;
+margin: -7px;
+}
+
+.h2 {
+
+}
+
+.searchEntry {background-color: yellow;
+color: red;
+float: right;
+font-size: 18px;
+border-radius: 4px;
+padding: 10px 10px 10px 10px;} /*for Jason*/
+
+.searchEntry:hover {cursor: pointer;
+    font-size: 20px;} /* for Jason*/
+
+.searchParameter {color: white;
+background-color: blue;
+float:inline-end;
+padding: 10px 10px 10px 10px;
+width: 120px;
+margin-left: 20px;
+margin-top: 10px;
+font-size: 20px;
+border-radius: 10px;} /* for Jason*/
+
+
+
+  #myInput {width: 98px;
+margin-left: 20px;
+margin-right: 20px;
+border-radius: 10px;
+padding: 10px 10px 10px 10px;}
+
+  #boxOfDVDsDrama{background-color: lightpink;} /* for Jason*/
+  #boxOfDVDsFamily{background-color: lightyellow;} /* for Jason*/
+  #boxOfDVDsThriller{background-color: lime;} /* for Jason*/
+  #boxOfDVDsComedy{background-color: lightgray;} /* for Jason*/
+  #boxOfDVDsAction{background-color: lemonchiffon;} /* for Jason*/
+
+  #example {background-color: yellow;
+  border: orange;
+  border-width: 3px;
+padding: 5px;
+}
+
+/* I do not use following 3 ids in final version but I used them earlier
+#parTag1 { font-size: 18px;
+    height: 60px; 
+    background-color: lightgrey;
+    text-align: right;
+
+}
+
+#question { font-size: 26px;
+    height: 30px; 
+    background-color: lightblue;
+
+}
+
+#list1 { background-color: yellow;
+    font-size: 28px;
+    left: 20%;
+    margin: 10px;
+    text-align: right;
+
+} */
+
+.hoover { 
+    box-shadow: gray;
+}
+
+#input2 {display: inline-block;
+}
+
+#firstDay {display: inline-block;
+  margin-left: 0px;
+  margin-right: 3%;
+}
+
+.background {
+background-color: gray;
+background-blend-mode: black;
+background-blend-mode: red;
+}
+
+
+.sidenav {margin-top: 40px;
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: yellow;
+  overflow-x: hidden;
+  padding-top: 20px;
+} /* for Jason */
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 19px;
+  color: #818181;
+  display: block;
+} /*for Jason*/
+
+.sidenav a:hover {
+  color: #f1f1f1;
+} /* for Jason*/
+
+.sidenav hr {margin-left: 20px;
+margin-right: 20px;}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 14px; 
+  padding: 0px 10px;
+} /* for Jason*/
+© 2021 GitHub, Inc.

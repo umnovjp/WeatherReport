@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head class = 'header'>
+
+    <meta charset="UTF-8">
+    <title>Awesome Weather Forecast</title>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+    
+    <header>
+
+      <h1>Weather Dashboard</h1>
+
+    </header>
+    
+    <div class="sidenav">
+        <a>Search for a city:</a>
+        <div class = 'cityEntry'>
+            <input id = 'myInput'>
+              <button class = 'searchParameter' type = 'button' id = 'enterCity' onclick = 'getCityWeather();'>Search</button>
+          </div>
+          <hr>
+        <a href="#boxOfDVDsDrama">Drama</a>
+        <a href="#boxOfDVDsFamily">Family</a>
+      </div>
+
+    <div class="main">
+      <p> </p> <!-- this paragraph is here to create spacing-->
+     <section id = 'bigWindow'></section>
+      <div id = 'input2'>
+                      
+      </div> <!--this div creates input area to enter search parameters-->
+     <!--Just do not understand why I was not able to see image here <img scr = 'assets/09d.png' alt = 'weather' style = 'width: 104px; height: 104px;'>-->
+            <h2>placeholder to show it is here</h2>
+      
+    <img src = 'assets/10d.png'>
+    <img src = 'assets/11d.png'>
+    <img src = 'assets/13d.png'>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src = "./script.js"></script>
+
+  </body>
+
+</html>
