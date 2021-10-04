@@ -71,18 +71,23 @@ padding: 5px;
 } */
 
 .hoover { 
-    box-shadow: gray;
+    box-shadow: lightgray;
 }
 
 #input2 {display: inline-block;
 }
 
-#firstDay {display: inline-block;
+#mainWindow {font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;}
+
+.firstDay {display: inline-block;
   margin-left: 0px;
   margin-right: 3%;
-  background-color: grey;
+  background-color: darkblue;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  width: 15.7%;
+  
 }
 
 #secondDay {display: inline-block;

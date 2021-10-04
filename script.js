@@ -12,25 +12,29 @@ var day;
 i = 0
 
 function getCityWeather () {var inputVal = document.getElementById('myInput').value;
-console.log(inputVal);
-document.getElementById('bigWindow').textContent = '';
-// var cityValue0 = document.createElement('p');
+var requestURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=32.9811256&lon=-96.5642011&exclude=hourly,minutely&appid=e17175c3afe7a2e923b08616e362f24c';
 // cityValue0.setAttribute('id', 'cityId0');
 // var entry0 = document.getElementById('cityId0').value;
-// localStorage.setItem('city0', entry0);
-// var citySideNav0 = localStorage.getItem('city0');
-// city0.textContent = citySideNav0;
+var cityEntry = 'city' + i;
+localStorage.setItem(cityEntry, inputVal);
+var cityValue0 = document.createElement('p');
+var cityHyperLink = document.createElement('a');
+cityHyperLink.setAttribute('id', 'hyper');
+document.getElementById('sidenav').appendChild(cityHyperLink);
+cityValue0.setAttribute('class', 'searchParameter');
+cityValue0.setAttribute('style', 'margin-left: 0px; width: 98px; background-color: lightgray; text-align: center; font-family: Arial, Helvetica, sans-serif; color: black;')
+cityHyperLink.setAttribute('href', requestURL);
+// cityValue0.setAttribute('style', 'background-color: gray; color: white; font-family: Arial, Helvetica, sans-serif; margin-left: 10%; width: 80%')
+cityValue0.textContent = inputVal;
+console.log(cityValue0);
+document.getElementById('hyper').appendChild(cityValue0);
+i++;
 
-// document.getElementsByClassName('sideNav').appendChild(cityValue0);
-// i++;
-// var scheduleContent0 = localStorage.getItem('hour0');
-// hour0.textContent = scheduleContent0;
-// var entry0 = document.getElementById('hour0').value;
-// localStorage.setItem('hour0', entry0)
-var requestURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=32.9811256&lon=-96.5642011&exclude=hourly,minutely&appid=e17175c3afe7a2e923b08616e362f24c';
+document.getElementById('bigWindow').textContent = '';
+
 fetch(requestURL)
 
-  .then(function (response) {
+  .then(function getCityWeather(response) {
     return response.json();
   })
   .then(function (data) {var object1 = data;
@@ -42,18 +46,20 @@ fetch(requestURL)
     var daty = moment.unix(unixDaty).format('l');
     var icon = object1.current.weather[0].icon;
     var displayIcon = document.createElement('img');
+    displayIcon.setAttribute('width', '50px');
     var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
     var realImage ='<img src =' + iconURL + '>';
     console.log(object1.current.weather);
     var kelvinTemp = object1.current.temp;
     celcTemp = (kelvinTemp - 273.15)*100; 
-    var fahrTemp = Math.round(celcTemp*1.8 + 32);
+    var fahrTemp = Math.round(celcTemp*1.8 + 3200);
     var tempy = 0.01*parseInt(fahrTemp);    
     // console.log(tempNumber);
     var windy = object1.current.wind_speed;
     var humy = object1.current.humidity;
     var uvIndexy = object1.current.uvi;
-    weatherData.innerHTML = inputVal + ' (' + daty + ') ' + realImage + '<br> Temp: ' + tempy + '\u00B0' + 'F ' + '<br> Wind: ' + windy + ' MPH ' + '<br> Humidity: ' + humy + '%' + '<br> UV Index: ' + uvIndexy
+    // uvIndexy.setAttribute('style', 'background-color: green;')
+    weatherData.innerHTML = inputVal + ' (' + daty + ') ' + realImage + '<br> Temp: ' + tempy + '\u00B0' + 'F ' + '<br> Wind: ' + windy + ' MPH ' + '<br> Humidity: ' + humy + '%' + '<br> UV Index: ' + uvIndexy //tried + '<style = background-color: green;>'
 
     document.getElementById('bigWindow').appendChild(weatherData);
     var createSpacing = document.createElement('p');
@@ -61,37 +67,64 @@ fetch(requestURL)
     document.getElementById('bigWindow').appendChild(createSpacing);
 
     var Day1 = document.createElement('div');
-    Day1.setAttribute('id', 'firstDay');
-    Day1.setAttribute('style', 'width: 15.7%;');
-    console.log(object1.daily[0].temp);
-    // var kelvinTemp = object1.current.temp;
+    Day1.setAttribute('class', 'firstDay');
     var unixDaty1 = unixDaty + 86400;
     var daty = moment.unix(unixDaty1).format('l');
     var icon = object1.daily[0].weather[0].icon;
     console.log(object1.current.weather);
     var kelvinTemp = object1.daily[0].temp.day;
     celcTemp = (kelvinTemp - 273.15)*100; 
-    var fahrTemp = Math.round(celcTemp*1.8 + 32);
+    var fahrTemp = Math.round(celcTemp*1.8 + 3200);
     var tempy = 0.01*parseInt(fahrTemp);
     var humy = object1.daily[0].humidity;
     var windy = object1.daily[0].wind_speed;
     var uvIndexy = object1.daily[0].uvi;
     var displayIcon = document.createElement('img');
+    displayIcon.setAttribute('alt', 'icon did not load');
     var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
     var realImage ='<img src =' + iconURL + '>';
     Day1.innerHTML = daty + '<br>' + realImage + '<br>Temp: ' + tempy + '\u00B0' + 'F ' + '<br>Wind: ' + windy + 'MPH ' + '<br>Humidity: ' + humy + '%';
-    //$('#firstDay').text(date);
     document.getElementById('bigWindow').appendChild(Day1);
+    // yes, I know I can do this code more dry. Not to repeat same thing 5 times. I will do it when I have more time. I am too far behind
     var Day2 = document.createElement('div');
-    Day2.innerHTML = object1;
-    Day2.setAttribute('id', 'secondDay')
-    Day2.setAttribute('style', 'border: blue; border-width:5px; border-style:solid; width: 15.7%;')
-    console.log(object1.daily[1].temp);
+    // Day2.innerHTML = object1;
+    Day2.setAttribute('class', 'firstDay')
+    var unixDaty1 = unixDaty + 2*86400;
+    var daty = moment.unix(unixDaty1).format('l');
+    var icon = object1.daily[0].weather[0].icon;
+    console.log(object1.current.weather);
+    var kelvinTemp = object1.daily[0].temp.day;
+    celcTemp = (kelvinTemp - 273.15)*100; 
+    var fahrTemp = Math.round(celcTemp*1.8 + 3200);
+    var tempy = 0.01*parseInt(fahrTemp);
+    var humy = object1.daily[0].humidity;
+    var windy = object1.daily[0].wind_speed;
+    var uvIndexy = object1.daily[0].uvi;
+    var displayIcon = document.createElement('img');
+    displayIcon.setAttribute('alt', 'icon did not load');
+    var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
+    var realImage ='<img src =' + iconURL + '>';
+    Day2.innerHTML = daty + '<br>' + realImage + '<br>Temp: ' + tempy + '\u00B0' + 'F ' + '<br>Wind: ' + windy + 'MPH ' + '<br>Humidity: ' + humy + '%';
     document.getElementById('bigWindow').appendChild(Day2);
     var Day3 = document.createElement('div');
-    Day3.textContent = 'day 3';
-    Day3.setAttribute('id', 'thirdDay')
-    Day3.setAttribute('style', 'border: red; border-width:5px; border-style:solid; width: 15.7%;')
+    // Day3.innerHTML = object1;
+    Day3.setAttribute('class', 'firstDay');
+    var unixDaty1 = unixDaty + 3*86400;
+    var daty = moment.unix(unixDaty1).format('l');
+    var icon = object1.daily[0].weather[0].icon;
+    console.log(object1.current.weather);
+    var kelvinTemp = object1.daily[0].temp.day;
+    celcTemp = (kelvinTemp - 273.15)*100; 
+    var fahrTemp = Math.round(celcTemp*1.8 + 3200);
+    var tempy = 0.01*parseInt(fahrTemp);
+    var humy = object1.daily[0].humidity;
+    var windy = object1.daily[0].wind_speed;
+    var uvIndexy = object1.daily[0].uvi;
+    var displayIcon = document.createElement('img');
+    displayIcon.setAttribute('alt', 'icon did not load');
+    var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
+    var realImage ='<img src =' + iconURL + '>';
+    Day3.innerHTML = daty + '<br>' + realImage + '<br>Temp: ' + tempy + '\u00B0' + 'F ' + '<br>Wind: ' + windy + 'MPH ' + '<br>Humidity: ' + humy + '%';
     document.getElementById('bigWindow').appendChild(Day3);
     var Day4 = document.createElement('div');
     Day4.textContent = 'day 4';
@@ -114,11 +147,4 @@ fetch(requestURL)
 }
 
 // event listener fetchImdbDrama.addEventListener('click', getApiDataImdb);
-
-function getApiWeather() {
-  // var genre = event.currentTarget.value;
-  // console.log(genre);
-
-}
-getApiWeather()
 
