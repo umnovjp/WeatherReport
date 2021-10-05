@@ -26,7 +26,7 @@ fetch(requestLocation)
   console.log(object1[0].lat + ' ' + object1[0].lon)});
   var lat = 32.9762; //object1[0].lat; 
   var lon = -96.5953; //object1[0].lon;
-  console.log(typeof(object1[0].lat));
+  // console.log(typeof(object1[0].lat));
   var stringLat = object1[0].lat;
   console.log(stringLat);
   var stringLon = object1[0].lon;
