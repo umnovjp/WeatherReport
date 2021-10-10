@@ -28,14 +28,14 @@ var city = cityAndState[0];
 var state = cityAndState[1]; 
 
 var cityEntry = 'city' + i; //former line 40
-localStorage.setItem(cityEntry, inputVal);
+localStorage.setItem(cityEntry, city);
 // var cityValueI = 'cityValue' + i;
 cityValue0 = document.createElement('button'); 
 cityValue0.setAttribute('class', 'searchParameter');
 cityValue0.setAttribute('style', 'margin-left: 20px; width: 120px; font-size: 16px; background-color: lightgray; text-align: center; font-family: Arial, Helvetica, sans-serif; color: black;')
 cityValue0.setAttribute('id', cityEntry);
 // i++;
-cityValue0.textContent = inputVal;
+cityValue0.textContent = city + ', ' + state;
 console.log(cityValue0.textContent + ' i = ' + i + ' cityEntry ' + cityEntry);
 document.getElementById('sidenav').appendChild(cityValue0); 
 i++;  // former line 51
@@ -80,8 +80,6 @@ fetch(requestLocation)
   var requestURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&appid=e17175c3afe7a2e923b08616e362f24c';
   console.log(requestURL); // end determine city from lat and longitude former line 38
 
-// former line 58
-//console.log(cityAndState);
 displayWeather(requestURL);
 // cityValue0.setAttribute('onclick', getCityWeather);
 
