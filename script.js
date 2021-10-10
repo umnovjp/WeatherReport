@@ -5,21 +5,49 @@ var cityButton = document.getElementById('enterCity');
 // var fetchOmdbButton = document.getElementById('searchOmdbButton');
 var fahrTemp
 // var enterYear0 = document.getElementById('enterYear');
-// var movieTitle;
+usStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 var object1;
 var lat;
 var lon;
 var date = moment().format("dddd, MMMM Do");
 var day;
-i = 0
+i = 0;
 
 function getCityWeather () {//this part determines lat and longitude from city name and state
 var inputVal = document.getElementById('myInput').value;
-cityAndState = inputVal.split(' ');
+cityAndState = inputVal.split(',');
+state2Letters = inputVal.slice(-2);
+stateUpperLetters = state2Letters.toUpperCase();
+console.log(stateUpperLetters);
 console.log(cityAndState[0] + ' ' + cityAndState[1]);
-state = 'TX';
+if (!usStates.includes(stateUpperLetters)) {console.log('there is no such state')};
+// state = 'TX';
 var city = cityAndState[0];
-var state = cityAndState[1];
+var state = cityAndState[1]; 
+
+var cityEntry = 'city' + i; //former line 40
+localStorage.setItem(cityEntry, inputVal);
+// var cityValueI = 'cityValue' + i;
+cityValue0 = document.createElement('button'); 
+cityValue0.setAttribute('class', 'searchParameter');
+cityValue0.setAttribute('style', 'margin-left: 20px; width: 120px; font-size: 16px; background-color: lightgray; text-align: center; font-family: Arial, Helvetica, sans-serif; color: black;')
+cityValue0.setAttribute('id', cityEntry);
+// i++;
+cityValue0.textContent = inputVal;
+console.log(cityValue0.textContent + ' i = ' + i + ' cityEntry ' + cityEntry);
+document.getElementById('sidenav').appendChild(cityValue0); 
+i++;  // former line 51
+
+var firstCity = document.getElementById(cityEntry); //former line 52
+firstCity.addEventListener('click', whichButton);
+function whichButton(event) {//console.log(event.currentTarget)
+cityAndState = event.currentTarget.textContent.split('city');
+cityAndState2 = cityAndState[0].split(',');
+var city = cityAndState2[0];
+
+var state = cityAndState2[1];
+state = state[1] + state[2]; // not sure why state.slice(1) or state.replace(' ','') both did not work;
+
 var requestLocation = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',US&appid=e17175c3afe7a2e923b08616e362f24c';
 fetch(requestLocation)
   .then(function getCityLocation(response) {return response.json();})
@@ -31,35 +59,31 @@ fetch(requestLocation)
   lat = parseFloat(stringLat);
   lon = parseFloat(stringLon);
   var requestURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&appid=e17175c3afe7a2e923b08616e362f24c';
-  console.log(requestURL);
+  console.log('state=' + state + 'city=' + city + 'URL=' + requestURL);  
+  displayWeather(lat, lon);}); // end determine city from lat and longitude former line 38
+};  
+// next line is fomer line 27
 
-  var cityEntry = 'city' + i;
-localStorage.setItem(cityEntry, inputVal);
-// var cityValueI = 'cityValue' + i;
-cityValue0 = document.createElement('button'); 
-// var cityHyperLink = document.createElement('a');
-// cityHyperLink.setAttribute('id', 'hyper');
-// document.getElementById('sidenav').appendChild(cityHyperLink);
-cityValue0.setAttribute('class', 'searchParameter');
-cityValue0.setAttribute('style', 'margin-left: 20px; width: 120px; font-size: 12px; background-color: lightgray; text-align: center; font-family: Arial, Helvetica, sans-serif; color: black;')
-cityValue0.setAttribute('id', cityEntry);
-cityValue0.textContent = inputVal;
-console.log(cityValue0.textContent + ' i = ' + i + ' cityEntry ' + cityEntry);
-document.getElementById('sidenav').appendChild(cityValue0);
+//tried to set next 12 lines as function to get lat and lon from city and state did not work
+var requestLocation = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',US&appid=e17175c3afe7a2e923b08616e362f24c';
+fetch(requestLocation)
+  .then(function getCityLocation(response) {return response.json();})
+  .then(function(data) {var object1 = data;
+  console.log(object1[0].lat + ' ' + object1[0].lon)
+  var stringLat = object1[0].lat;
+  // console.log(stringLat);
+  var stringLon = object1[0].lon;
+  lat = parseFloat(stringLat);
+  lon = parseFloat(stringLon);
+  var requestURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&appid=e17175c3afe7a2e923b08616e362f24c';
+  console.log(requestURL); // end determine city from lat and longitude former line 38
 
-var firstCity = document.getElementById("#city0");
-var secondCity = document.getAnimations('#city1');
-var thirdCity = document.querySelector('#city2');
-var forthCity = document.querySelector('#city3');
-firstCity.addEventListener('click', whichButton);
-secondCity.addEventListener('click', whichButton);
-thirdCity.addEventListener('click', whichButton);
-forthCity.addEventListener('click', whichButton);
-i++;
-function whichButton(event) {console.log(event.currentTarget)};
-
+// former line 58
+//console.log(cityAndState);
+displayWeather(lat, lon);
 // cityValue0.setAttribute('onclick', getCityWeather);
-// i++;
+
+function displayWeather (lat, lon){
 document.getElementById('bigWindow').textContent = '';
 
 fetch(requestURL)
@@ -122,7 +146,6 @@ fetch(requestURL)
     document.getElementById('bigWindow').appendChild(Day1);
     // yes, I know I can do this code more dry. Not to repeat same thing 5 times. I will do it when I have more time. I am too far behind
     var Day2 = document.createElement('div');
-    // Day2.innerHTML = object1;
     Day2.setAttribute('class', 'firstDay')
     var unixDaty1 = unixDaty + 2*86400;
     var daty = moment.unix(unixDaty1).format('l');
@@ -134,7 +157,6 @@ fetch(requestURL)
     var tempy = 0.01*parseInt(fahrTemp);
     var humy = object1.daily[1].humidity;
     var windy = object1.daily[1].wind_speed;
-    // var uvIndexy = object1.daily[1].uvi;
     var displayIcon = document.createElement('img');
     displayIcon.setAttribute('alt', 'icon did not load');
     var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
@@ -154,7 +176,6 @@ fetch(requestURL)
     var tempy = 0.01*parseInt(fahrTemp);
     var humy = object1.daily[2].humidity;
     var windy = object1.daily[2].wind_speed;
-    // var uvIndexy = object1.daily[2].uvi;
     var displayIcon = document.createElement('img');
     displayIcon.setAttribute('alt', 'icon did not load');
     var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
@@ -174,30 +195,36 @@ fetch(requestURL)
     var tempy = 0.01*parseInt(fahrTemp);
     var humy = object1.daily[3].humidity;
     var windy = object1.daily[3].wind_speed;
-    // var uvIndexy = object1.daily[2].uvi;
     var displayIcon = document.createElement('img');
     displayIcon.setAttribute('alt', 'icon did not load');
     var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
     var realImage ='<img src =' + iconURL + '>';
     Day4.innerHTML = daty + '<br>' + realImage + '<br>Temp: ' + tempy + '\u00B0' + 'F ' + '<br>Wind: ' + windy + 'MPH ' + '<br>Humidity: ' + humy + '%';
-
     document.getElementById('bigWindow').appendChild(Day4);
+
     var Day5 = document.createElement('div');
-    Day5.textContent = 'day 5';
-    Day5.setAttribute('id', 'fifthDay')
-    Day5.setAttribute('style', 'border: yellow; border-width:5px; border-style:solid; width: 15.7%;')
+    Day5.setAttribute('class', 'firstDay');
+    var unixDaty1 = unixDaty + 5*86400;
+    var daty = moment.unix(unixDaty1).format('l');
+    var icon = object1.daily[4].weather[0].icon;
+    console.log(object1.current.weather);
+    var kelvinTemp = object1.daily[4].temp.day;
+    celcTemp = (kelvinTemp - 273.15)*100; 
+    var fahrTemp = Math.floor(celcTemp*1.8 + 3200);
+    var tempy = 0.01*parseInt(fahrTemp);
+    var humy = object1.daily[4].humidity;
+    var windy = object1.daily[4].wind_speed;
+    var displayIcon = document.createElement('img');
+    displayIcon.setAttribute('alt', 'icon did not load');
+    var iconURL = 'http://openweathermap.org/img/w/' + icon + '.png';
+    var realImage ='<img src =' + iconURL + '>';
+    Day5.innerHTML = daty + '<br>' + realImage + '<br>Temp: ' + tempy + '\u00B0' + 'F ' + '<br>Wind: ' + windy + 'MPH ' + '<br>Humidity: ' + humy + '%';
+    // Day5.setAttribute('style', 'border: yellow; border-width:5px; border-style:solid; width: 15.7%;')
     document.getElementById('bigWindow').appendChild(Day5);
   })
-}); // end first then
-
- // end second then function
-    $('#bigWindow').text(date)
-    
-        //weatherData.textContent = object1;
-    
-
-    
-
+  }}); // end first then deleted }
+// end another then function
+    $('#bigWindow').text(date) // not sure why it is not displayed
 }
 
 // event listener fetchImdbDrama.addEventListener('click', getApiDataImdb);
