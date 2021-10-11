@@ -15,3 +15,4 @@ For some reason, using Math.floor() or Math.round() was not successful.
 ![image](https://user-images.githubusercontent.com/88174852/136720294-a1948725-77e7-4567-9dec-392f0bc18d31.png)
 I succeeded to create a solution to fix this problem. It works right now, but it will not wotk if temperature is > 100F. 
 It was great experience. I learned the hard way that I need to think about every feature that I want to have from the beginning. Instead I added features as I wrote the code. It took much longer time than it should. I will be smarter in the future. 
+And I would like to thank learning assistants. They were there for me when I got stuck.
