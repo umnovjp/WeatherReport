@@ -12,7 +12,7 @@ var date = moment().format("dddd, MMMM Do");
 var day;
 i = 0;
 
-function getCityWeather () {//this part determines lat and longitude from city name and state. next time I will write a global function
+function getCityWeather () {//this part determines lat and longitude from city name and state. next time I will write a global
 var inputVal = document.getElementById('myInput').value;
 cityAndState = inputVal.split(',');
 state2Letters = inputVal.slice(-2);
@@ -63,7 +63,7 @@ fetch(requestLocation)
 // next line is fomer line 27
 
 //tried to set next 12 lines as function to get lat and lon from city and state did not work
-var requestLocation = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',US&appid=e17175c3afe7a2e923b08616e362f24c';
+var requestLocation = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',US&appid=e17175c3afe7a2e923b08616e362f24c';
 fetch(requestLocation)
   .then(function getCityLocation(response) {return response.json();})
   .then(function(data) {var object1 = data;
@@ -77,6 +77,7 @@ fetch(requestLocation)
   console.log(requestURL); // end determine city from lat and longitude former line 38
 
 displayWeather(requestURL);
+// cityValue0.setAttribute('onclick', getCityWeather);
 
 }); // end first then deleted }
 // end another then function
