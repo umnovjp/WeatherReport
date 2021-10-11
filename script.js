@@ -1,21 +1,18 @@
-// password for geo website is B*12; link is http://api.positionstack.com/v1/forward/?access_key=f7684ffee4822effc307887dadfa27ef&query=Sachse,TX
 //changed google PW to B****!******; project-name: Bootcamp homework; project ID: bootcamp=homework-328003
 var cityButton = document.getElementById('enterCity');
-// var bigWindow = document.getElementById('input2')
-// var fetchOmdbButton = document.getElementById('searchOmdbButton');
 var fahrTemp
 // var enterYear0 = document.getElementById('enterYear');
 usStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 var object1;
 var lat;
 var lon;
+var city;
+var state;
 var date = moment().format("dddd, MMMM Do");
 var day;
-//var requestURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=32.9762&lon=-96.5953&exclude=hourly,minutely&appid=e17175c3afe7a2e923b08616e362f24c';
-var inputVal = 'sachse, tx';
 i = 0;
 
-function getCityWeather () {//this part determines lat and longitude from city name and state
+function getCityWeather () {//this part determines lat and longitude from city name and state. next time I will write a global function
 var inputVal = document.getElementById('myInput').value;
 cityAndState = inputVal.split(',');
 state2Letters = inputVal.slice(-2);
@@ -23,7 +20,6 @@ stateUpperLetters = state2Letters.toUpperCase();
 console.log(stateUpperLetters);
 console.log(cityAndState[0] + ' ' + cityAndState[1]);
 if (!usStates.includes(stateUpperLetters)) {console.log('there is no such state')};
-// state = 'TX';
 var city = cityAndState[0];
 var state = cityAndState[1]; 
 
@@ -81,11 +77,10 @@ fetch(requestLocation)
   console.log(requestURL); // end determine city from lat and longitude former line 38
 
 displayWeather(requestURL);
-// cityValue0.setAttribute('onclick', getCityWeather);
 
 }); // end first then deleted }
 // end another then function
-    $('#bigWindow').text(date) // not sure why it is not displayed
+    $('#bigWindow').text(date) // not sure why it is not displayed most of the time
 }
 function displayWeather (requestURL){
   document.getElementById('bigWindow').textContent = '';
@@ -111,7 +106,8 @@ function displayWeather (requestURL){
       var kelvinTemp = object1.current.temp;
       celcTemp = (kelvinTemp - 273.15)*100; 
       var fahrTemp = Math.round(celcTemp*1.8 + 3200);
-      var tempy = 0.01*parseInt(fahrTemp);    
+      var fahrTempStr = fahrTemp.toString();
+      var tempy = fahrTempStr[0] + fahrTempStr[1] + '.' + fahrTempStr[2] + fahrTempStr[3];  // this one did not work: 0.01*parseInt(fahrTemp);   
       // console.log(tempNumber);
       var windy = object1.current.wind_speed;
       var humy = object1.current.humidity;
@@ -122,11 +118,12 @@ function displayWeather (requestURL){
       else {uvIndexyColor = 'yellow'}
       console.log(uvIndexyColor);
       // uvIndexy.setAttribute('style', 'background-color: green;')
-      weatherData.innerHTML = inputVal + ' (' + daty + ') ' + realImage + '<br> Temp: ' + tempy + '\u00B0' + 'F ' + '<br> Wind: ' + windy + ' MPH ' + '<br> Humidity: ' + humy + '%' + '<br> UV Index: ' + '<span style = "background-color: ' + uvIndexyColor + ';">' + uvIndexy + '</span>'// uvIndexy //tried + '<style = background-color: green;>'
+      weatherData.innerHTML = cityAndState + ' (' + daty + ') ' + realImage + '<br> Temp: ' + tempy + '\u00B0' + 'F ' + '<br> Wind: ' + windy + ' MPH ' + '<br> Humidity: ' + humy + '%' + '<br> UV Index: ' + '<span style = "background-color: ' + uvIndexyColor + ';">' + uvIndexy + '</span>'// uvIndexy //tried + '<style = background-color: green;>'
   
       document.getElementById('bigWindow').appendChild(weatherData);
       var createSpacing = document.createElement('p');
       createSpacing.textContent = ' 5 day forecast';
+      createSpacing.setAttribute('style', 'font-size: 20px; text-align: left; font-family: Arial, Helvetica, sans-serif; color: black');
       document.getElementById('bigWindow').appendChild(createSpacing);
   
       var Day1 = document.createElement('div');
@@ -138,7 +135,8 @@ function displayWeather (requestURL){
       var kelvinTemp = object1.daily[0].temp.day;
       celcTemp = (kelvinTemp - 273.15)*100; 
       var fahrTemp = Math.floor(celcTemp*1.8 + 3200);
-      var tempy = 0.01*parseInt(fahrTemp);
+      var fahrTempStr = fahrTemp.toString();
+      var tempy = fahrTempStr[0] + fahrTempStr[1] + '.' + fahrTempStr[2] + fahrTempStr[3];  // this one did not work: 0.01*parseInt(fahrTemp);
       var humy = object1.daily[0].humidity;
       var windy = object1.daily[0].wind_speed;
       // var uvIndexy = object1.daily[0].uvi;
@@ -158,7 +156,8 @@ function displayWeather (requestURL){
       var kelvinTemp = object1.daily[1].temp.day;
       celcTemp = (kelvinTemp - 273.15)*100; 
       var fahrTemp = Math.floor(celcTemp*1.8 + 3200);
-      var tempy = 0.01*parseInt(fahrTemp);
+      var fahrTempStr = fahrTemp.toString();
+      var tempy = fahrTempStr[0] + fahrTempStr[1] + '.' + fahrTempStr[2] + fahrTempStr[3];  // this one did not work: 0.01*parseInt(fahrTemp);var tempy = 0.01*parseInt(fahrTemp);
       var humy = object1.daily[1].humidity;
       var windy = object1.daily[1].wind_speed;
       var displayIcon = document.createElement('img');
@@ -177,7 +176,8 @@ function displayWeather (requestURL){
       var kelvinTemp = object1.daily[2].temp.day;
       celcTemp = (kelvinTemp - 273.15)*100; 
       var fahrTemp = Math.floor(celcTemp*1.8 + 3200);
-      var tempy = 0.01*parseInt(fahrTemp);
+      var fahrTempStr = fahrTemp.toString();
+      var tempy = fahrTempStr[0] + fahrTempStr[1] + '.' + fahrTempStr[2] + fahrTempStr[3];  // this one did not work: 0.01*parseInt(fahrTemp);
       var humy = object1.daily[2].humidity;
       var windy = object1.daily[2].wind_speed;
       var displayIcon = document.createElement('img');
@@ -196,7 +196,8 @@ function displayWeather (requestURL){
       var kelvinTemp = object1.daily[3].temp.day;
       celcTemp = (kelvinTemp - 273.15)*100; 
       var fahrTemp = Math.floor(celcTemp*1.8 + 3200);
-      var tempy = 0.01*parseInt(fahrTemp);
+      var fahrTempStr = fahrTemp.toString();
+      var tempy = fahrTempStr[0] + fahrTempStr[1] + '.' + fahrTempStr[2] + fahrTempStr[3];  // this one did not work: 0.01*parseInt(fahrTemp);
       var humy = object1.daily[3].humidity;
       var windy = object1.daily[3].wind_speed;
       var displayIcon = document.createElement('img');
@@ -215,7 +216,8 @@ function displayWeather (requestURL){
       var kelvinTemp = object1.daily[4].temp.day;
       celcTemp = (kelvinTemp - 273.15)*100; 
       var fahrTemp = Math.floor(celcTemp*1.8 + 3200);
-      var tempy = 0.01*parseInt(fahrTemp);
+      var fahrTempStr = fahrTemp.toString();
+      var tempy = fahrTempStr[0] + fahrTempStr[1] + '.' + fahrTempStr[2] + fahrTempStr[3];  // this one did not work: 0.01*parseInt(fahrTemp);
       var humy = object1.daily[4].humidity;
       var windy = object1.daily[4].wind_speed;
       var displayIcon = document.createElement('img');

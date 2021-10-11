@@ -2,21 +2,17 @@ h1 {background-image: linear-gradient(to right, rgb(109, 109, 207), darkblue);
     color:white;
 text-align: center;
 margin: -7px;
-}
-
-.h2 {
-
-}
+} /* I use*/
 
 .searchEntry {background-color: yellow;
 color: red;
 float: right;
 font-size: 18px;
 border-radius: 4px;
-padding: 10px 10px 10px 10px;} /*for Jason*/
+padding: 10px 10px 10px 10px;} /*I use*/
 
 .searchEntry:hover {cursor: pointer;
-    font-size: 20px;} /* for Jason*/
+    font-size: 20px;} /* I use*/
 
 .searchParameter {color: white;
 background-color: blue;
@@ -25,60 +21,23 @@ padding: 10px 10px 10px 10px;
 width: 120px;
 margin-left: 20px;
 margin-top: 10px;
-font-size: 20px;
-border-radius: 10px;} /* for Jason*/
-
-
+font-size: 16px;
+border-radius: 10px;} /* I use*/
 
   #myInput {width: 98px;
 margin-left: 20px;
 margin-right: 20px;
 border-radius: 10px;
-padding: 10px 10px 10px 10px;}
-
-  #boxOfDVDsDrama{background-color: lightpink;} /* for Jason*/
-  #boxOfDVDsFamily{background-color: lightyellow;} /* for Jason*/
-  #boxOfDVDsThriller{background-color: lime;} /* for Jason*/
-  #boxOfDVDsComedy{background-color: lightgray;} /* for Jason*/
-  #boxOfDVDsAction{background-color: lemonchiffon;} /* for Jason*/
-
-  #example {background-color: yellow;
-  border: orange;
-  border-width: 3px;
-padding: 5px;
-}
-
-/* I do not use following 3 ids in final version but I used them earlier
-#parTag1 { font-size: 18px;
-    height: 60px; 
-    background-color: lightgrey;
-    text-align: right;
-
-}
-
-#question { font-size: 26px;
-    height: 30px; 
-    background-color: lightblue;
-
-}
-
-#list1 { background-color: yellow;
-    font-size: 28px;
-    left: 20%;
-    margin: 10px;
-    text-align: right;
-
-} */
+padding: 10px 10px 10px 10px;}/* I use*/
 
 .hoover { 
-    box-shadow: lightgray;
-}
+    box-shadow: lightgray;} /* not sure*/
 
 #input2 {display: inline-block;
-}
+} /* I use*/
 
 #mainWindow {font-family: Arial, Helvetica, sans-serif;
-  font-size: 32px;}
+  font-size: 18px;} /* I use*/
 
 .firstDay {display: inline-block;
   margin-left: 0px;
@@ -88,33 +47,14 @@ padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
   width: 15.7%;
   
-}
+} /* I use*/
 
-#secondDay {display: inline-block;
-  margin-left: 0px;
-  margin-right: 3%;
-}
-
-#thirdDay {display: inline-block;
-  margin-left: 0px;
-  margin-right: 3%;
-}
-
-#forthDay {display: inline-block;
-  margin-left: 0px;
-  margin-right: 3%;
-}
-
-#fifthDay {display: inline-block;
-  margin-left: 0px;
-  margin-right: 3%;
-}
 
 .background {
 background-color: gray;
 background-blend-mode: black;
 background-blend-mode: red;
-}
+} /* I do not use*/
 
 
 .sidenav {margin-top: 40px;
@@ -127,7 +67,7 @@ background-blend-mode: red;
   background-color: yellow;
   overflow-x: hidden;
   padding-top: 20px;
-} /* for Jason */
+} /* I use */
 
 .sidenav a {
   padding: 6px 8px 6px 16px;
@@ -135,18 +75,18 @@ background-blend-mode: red;
   font-size: 19px;
   color: #818181;
   display: block;
-} /*for Jason*/
+} /*I use*/
 
 .sidenav a:hover {
   color: #f1f1f1;
-} /* for Jason*/
+} /* I use*/
 
 .sidenav hr {margin-left: 20px;
-margin-right: 20px;}
+margin-right: 20px;}/* I use*/
 
 .main {
   margin-left: 160px; /* Same as the width of the sidenav */
   font-size: 14px; 
   padding: 0px 10px;
-} /* for Jason*/
+} /* I use */
 © 2021 GitHub, Inc.
