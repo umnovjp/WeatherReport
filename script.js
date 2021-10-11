@@ -46,7 +46,7 @@ var city = cityAndState2[0];
 var state = cityAndState2[1];
 state = state[1] + state[2]; // not sure why state.slice(1) or state.replace(' ','') both did not work;
 
-var requestLocation = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',US&appid=e17175c3afe7a2e923b08616e362f24c';
+var requestLocation = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',US&appid=e17175c3afe7a2e923b08616e362f24c';
 fetch(requestLocation)
   .then(function getCityLocation(response) {return response.json();})
   .then(function(data) {var object1 = data;
